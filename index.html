@@ -3,19 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TalentFlow - AI-Powered Recruitment Platform</title>
+    <title>Phoenix Talent - Unified Recruitment Ecosystem</title>
     <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
         * { font-family: 'Inter', sans-serif; }
         .gradient-bg { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
-        .glass-effect { backdrop-filter: blur(10px); background: rgba(255, 255, 255, 0.1); }
-        .ai-glow { box-shadow: 0 0 20px rgba(102, 126, 234, 0.3); }
+        .phoenix-gradient { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+        .glass-effect { backdrop-filter: blur(15px); background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); }
+        .ai-glow { box-shadow: 0 0 30px rgba(102, 126, 234, 0.4); }
+        .phoenix-glow { box-shadow: 0 0 25px rgba(240, 147, 251, 0.3); }
         .animate-pulse-slow { animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+        .animate-float { animation: float 6s ease-in-out infinite; }
+        @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-10px); } }
+        .blockchain-verified { background: linear-gradient(45deg, #00d4aa, #00b4d8); }
+        .skills-passport { background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%); }
+        .game-card { background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); }
+        .neural-network { background: linear-gradient(135deg, #e0c3fc 0%, #9bb5ff 100%); }
     </style>
 </head>
 <body class="bg-gray-50">
@@ -25,46 +33,64 @@
         const { useState, useEffect, useRef } = React;
         const { createRoot } = ReactDOM;
 
-        // Mock data
+        // Enhanced Mock Data
         const mockJobs = [
             {
                 id: 1,
-                title: "Senior Software Engineer",
+                title: "Senior AI/ML Engineer",
                 company: "TechCorp Inc.",
                 location: "San Francisco, CA",
-                salary: "$120,000 - $180,000",
+                salary: "$140,000 - $200,000",
                 type: "Full-time",
-                description: "We're looking for a skilled Senior Software Engineer to join our growing team. You'll work on cutting-edge projects using React, Node.js, and cloud technologies.",
-                requirements: ["5+ years experience", "React/Node.js", "Cloud platforms", "Team leadership"],
+                description: "Lead AI initiatives in our cutting-edge platform. Work with transformer models, NLP, and computer vision.",
+                requirements: ["5+ years ML experience", "Python/PyTorch", "Cloud platforms", "Team leadership"],
                 posted: "2 days ago",
-                aiScore: 0.95,
-                applications: 127
+                phoenixScore: 0.96,
+                applications: 127,
+                ppqaApplications: 23,
+                cultureFit: 0.92,
+                skillsMatch: 0.94,
+                verified: true,
+                urgency: "high",
+                remote: true
             },
             {
                 id: 2,
-                title: "Product Manager",
+                title: "Product Manager - AI Platform",
                 company: "Innovation Labs",
                 location: "New York, NY",
-                salary: "$90,000 - $140,000",
+                salary: "$120,000 - $160,000",
                 type: "Full-time",
-                description: "Lead product strategy and roadmap for our AI-powered analytics platform. Work closely with engineering and design teams.",
-                requirements: ["3+ years PM experience", "Analytics platforms", "Agile methodology", "Stakeholder management"],
+                description: "Drive product strategy for our AI-powered analytics platform. Shape the future of data-driven decision making.",
+                requirements: ["3+ years PM experience", "AI/ML product experience", "Analytics platforms", "Stakeholder management"],
                 posted: "1 week ago",
-                aiScore: 0.87,
-                applications: 89
+                phoenixScore: 0.89,
+                applications: 89,
+                ppqaApplications: 34,
+                cultureFit: 0.87,
+                skillsMatch: 0.91,
+                verified: true,
+                urgency: "medium",
+                remote: false
             },
             {
                 id: 3,
-                title: "UX Designer",
-                company: "Design Studio",
+                title: "Senior UX Designer",
+                company: "Design Studios",
                 location: "Remote",
-                salary: "$70,000 - $100,000",
+                salary: "$85,000 - $120,000",
                 type: "Full-time",
-                description: "Create intuitive user experiences for our SaaS platform. Collaborate with product and engineering teams to deliver exceptional user interfaces.",
-                requirements: ["Portfolio required", "Figma/Sketch", "User research", "Prototyping"],
+                description: "Create intuitive experiences for our recruitment platform. Lead design system development and user research.",
+                requirements: ["Portfolio required", "Figma/Sketch mastery", "User research", "Design systems"],
                 posted: "3 days ago",
-                aiScore: 0.92,
-                applications: 156
+                phoenixScore: 0.93,
+                applications: 156,
+                ppqaApplications: 45,
+                cultureFit: 0.95,
+                skillsMatch: 0.88,
+                verified: true,
+                urgency: "high",
+                remote: true
             }
         ];
 
@@ -72,13 +98,19 @@
             {
                 id: 1,
                 name: "Sarah Chen",
-                title: "Senior Frontend Developer",
+                title: "Senior AI Engineer",
                 location: "San Francisco, CA",
                 experience: "6 years",
-                skills: ["React", "TypeScript", "Node.js", "AWS"],
-                aiScore: 0.96,
-                resumeScore: 92,
-                avatar: "SC"
+                skills: ["PyTorch", "NLP", "Computer Vision", "MLOps"],
+                phoenixScore: 0.96,
+                skillsPassportScore: 94,
+                verifiedSkills: 8,
+                blockchainVerified: true,
+                cultureFit: 0.92,
+                projectsCompleted: 15,
+                avatar: "SC",
+                assessmentGames: 5,
+                lastActive: "2 hours ago"
             },
             {
                 id: 2,
@@ -86,10 +118,16 @@
                 title: "Full Stack Engineer",
                 location: "Austin, TX",
                 experience: "4 years",
-                skills: ["Python", "React", "PostgreSQL", "Docker"],
-                aiScore: 0.89,
-                resumeScore: 88,
-                avatar: "MR"
+                skills: ["React", "Node.js", "Python", "AWS"],
+                phoenixScore: 0.89,
+                skillsPassportScore: 88,
+                verifiedSkills: 6,
+                blockchainVerified: true,
+                cultureFit: 0.85,
+                projectsCompleted: 12,
+                avatar: "MR",
+                assessmentGames: 4,
+                lastActive: "1 day ago"
             },
             {
                 id: 3,
@@ -97,50 +135,101 @@
                 title: "Product Designer",
                 location: "Seattle, WA",
                 experience: "5 years",
-                skills: ["Figma", "User Research", "Prototyping", "Design Systems"],
-                aiScore: 0.94,
-                resumeScore: 90,
-                avatar: "EJ"
+                skills: ["Figma", "User Research", "Design Systems", "Prototyping"],
+                phoenixScore: 0.94,
+                skillsPassportScore: 91,
+                verifiedSkills: 7,
+                blockchainVerified: true,
+                cultureFit: 0.96,
+                projectsCompleted: 18,
+                avatar: "EJ",
+                assessmentGames: 6,
+                lastActive: "3 hours ago"
             }
         ];
 
-        // Components
+        const mockAssessments = [
+            {
+                id: 1,
+                name: "Cognitive Puzzle Challenge",
+                type: "cognitive",
+                duration: "15 min",
+                description: "Test problem-solving and logical thinking",
+                icon: "🧩",
+                participants: 12542,
+                averageScore: 76
+            },
+            {
+                id: 2,
+                name: "Code Combat Arena",
+                type: "technical",
+                duration: "30 min",
+                description: "Real-world coding challenges",
+                icon: "⚔️",
+                participants: 8934,
+                averageScore: 82
+            },
+            {
+                id: 3,
+                name: "Leadership Simulation",
+                type: "behavioral",
+                duration: "20 min",
+                description: "Team management scenarios",
+                icon: "👑",
+                participants: 15678,
+                averageScore: 71
+            }
+        ];
+
+        // Enhanced Components
         const Header = ({ currentUser, onLogout, onUserTypeChange }) => (
             <header className="bg-white shadow-sm border-b">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between items-center py-4">
                         <div className="flex items-center">
                             <div className="flex-shrink-0 flex items-center">
-                                <div className="w-10 h-10 gradient-bg rounded-lg flex items-center justify-center">
-                                    <span className="text-white font-bold text-xl">T</span>
+                                <div className="w-12 h-12 phoenix-gradient rounded-xl flex items-center justify-center phoenix-glow">
+                                    <span className="text-white font-bold text-xl">🔥</span>
                                 </div>
-                                <span className="ml-2 text-xl font-bold text-gray-900">TalentFlow</span>
+                                <div className="ml-3">
+                                    <span className="text-2xl font-bold text-gray-900">Phoenix Talent</span>
+                                    <p className="text-xs text-gray-500">Unified Recruitment Ecosystem</p>
+                                </div>
                             </div>
                         </div>
                         
                         {currentUser && (
                             <div className="flex items-center space-x-4">
+                                <div className="flex items-center space-x-2 bg-green-50 px-3 py-1 rounded-full">
+                                    <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                                    <span className="text-xs text-green-700">AI Active</span>
+                                </div>
                                 <select 
-                                    className="px-3 py-2 border border-gray-300 rounded-md text-sm"
+                                    className="px-3 py-2 border border-gray-300 rounded-md text-sm bg-white"
                                     value={currentUser.type}
                                     onChange={(e) => onUserTypeChange(e.target.value)}
                                 >
-                                    <option value="recruiter">Recruiter View</option>
-                                    <option value="candidate">Candidate View</option>
+                                    <option value="recruiter">Recruiter Command Center</option>
+                                    <option value="candidate">Candidate Platform</option>
                                 </select>
                                 <div className="flex items-center space-x-2">
-                                    <div className="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center">
+                                    <div className="w-10 h-10 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
                                         <span className="text-white text-sm font-medium">
                                             {currentUser.name.split(' ').map(n => n[0]).join('')}
                                         </span>
                                     </div>
-                                    <span className="text-gray-700">{currentUser.name}</span>
+                                    <div>
+                                        <span className="text-gray-700 font-medium">{currentUser.name}</span>
+                                        <p className="text-xs text-gray-500">{currentUser.type === 'recruiter' ? 'Talent Acquisition' : 'Job Seeker'}</p>
+                                    </div>
                                 </div>
                                 <button 
                                     onClick={onLogout}
-                                    className="text-gray-600 hover:text-gray-900"
+                                    className="text-gray-600 hover:text-gray-900 p-2 rounded-lg hover:bg-gray-100"
                                 >
-                                    Logout
+                                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                                    </svg>
                                 </button>
                             </div>
                         )}
@@ -151,33 +240,66 @@
 
         const LandingPage = ({ onLogin }) => (
             <div className="min-h-screen">
-                <div className="gradient-bg min-h-screen flex items-center justify-center">
-                    <div className="max-w-4xl mx-auto text-center px-4">
-                        <h1 className="text-5xl font-bold text-white mb-6">
-                            AI-Powered Recruitment Platform
-                        </h1>
-                        <p className="text-xl text-white/90 mb-8">
-                            Connect talent with opportunity using advanced AI matching, intelligent screening, and seamless collaboration tools.
-                        </p>
+                <div className="gradient-bg min-h-screen flex items-center justify-center relative overflow-hidden">
+                    <div className="absolute inset-0">
+                        <div className="absolute top-20 left-20 w-32 h-32 bg-white/10 rounded-full animate-float"></div>
+                        <div className="absolute bottom-20 right-20 w-24 h-24 bg-white/10 rounded-full animate-float" style={{animationDelay: '2s'}}></div>
+                        <div className="absolute top-1/2 left-1/4 w-16 h-16 bg-white/10 rounded-full animate-float" style={{animationDelay: '4s'}}></div>
+                    </div>
+                    
+                    <div className="max-w-6xl mx-auto text-center px-4 relative z-10">
+                        <div className="mb-8">
+                            <div className="inline-flex items-center space-x-2 bg-white/20 backdrop-blur-sm rounded-full px-4 py-2 mb-6">
+                                <span className="text-white text-sm">🚀</span>
+                                <span className="text-white text-sm font-medium">Powered by Ethical AI</span>
+                            </div>
+                            <h1 className="text-6xl font-bold text-white mb-6">
+                                The Future of<br />
+                                <span className="phoenix-gradient bg-clip-text text-transparent">Talent Acquisition</span>
+                            </h1>
+                            <p className="text-xl text-white/90 mb-8 max-w-3xl mx-auto">
+                                Unite professional networking, job discovery, and employer branding in one powerful platform. 
+                                Experience recruitment reimagined with AI-driven matching, skills-first hiring, and complete transparency.
+                            </p>
+                        </div>
                         
-                        <div className="grid md:grid-cols-2 gap-6 mb-8">
-                            <div className="glass-effect p-6 rounded-lg">
-                                <h3 className="text-2xl font-semibold text-white mb-4">For Recruiters</h3>
-                                <ul className="text-white/90 space-y-2 text-left">
-                                    <li>• AI-powered candidate screening</li>
-                                    <li>• Advanced search and filtering</li>
+                        <div className="grid md:grid-cols-3 gap-6 mb-12">
+                            <div className="glass-effect p-6 rounded-xl backdrop-blur-sm">
+                                <div className="w-12 h-12 phoenix-gradient rounded-lg flex items-center justify-center mb-4 mx-auto">
+                                    <span className="text-white text-2xl">🎯</span>
+                                </div>
+                                <h3 className="text-xl font-semibold text-white mb-3">Recruiter Command Center</h3>
+                                <ul className="text-white/90 space-y-2 text-sm">
+                                    <li>• AI-powered semantic search</li>
+                                    <li>• Phoenix filters & verification</li>
                                     <li>• Collaborative hiring workflows</li>
-                                    <li>• Real-time analytics dashboard</li>
+                                    <li>• PPQA pricing model</li>
                                 </ul>
                             </div>
                             
-                            <div className="glass-effect p-6 rounded-lg">
-                                <h3 className="text-2xl font-semibold text-white mb-4">For Candidates</h3>
-                                <ul className="text-white/90 space-y-2 text-left">
+                            <div className="glass-effect p-6 rounded-xl backdrop-blur-sm">
+                                <div className="w-12 h-12 phoenix-gradient rounded-lg flex items-center justify-center mb-4 mx-auto">
+                                    <span className="text-white text-2xl">🛡️</span>
+                                </div>
+                                <h3 className="text-xl font-semibold text-white mb-3">Skills Passport</h3>
+                                <ul className="text-white/90 space-y-2 text-sm">
+                                    <li>• Blockchain-verified credentials</li>
+                                    <li>• Gamified skill assessments</li>
                                     <li>• AI resume optimization</li>
-                                    <li>• Personalized job matching</li>
-                                    <li>• Interview preparation tools</li>
-                                    <li>• Career insights and analytics</li>
+                                    <li>• Career pathway guidance</li>
+                                </ul>
+                            </div>
+                            
+                            <div className="glass-effect p-6 rounded-xl backdrop-blur-sm">
+                                <div className="w-12 h-12 phoenix-gradient rounded-lg flex items-center justify-center mb-4 mx-auto">
+                                    <span className="text-white text-2xl">🤖</span>
+                                </div>
+                                <h3 className="text-xl font-semibold text-white mb-3">Ethical AI Engine</h3>
+                                <ul className="text-white/90 space-y-2 text-sm">
+                                    <li>• Multi-layer matching algorithm</li>
+                                    <li>• Bias detection & mitigation</li>
+                                    <li>• Predictive analytics</li>
+                                    <li>• Explainable AI decisions</li>
                                 </ul>
                             </div>
                         </div>
@@ -185,16 +307,22 @@
                         <div className="space-x-4">
                             <button 
                                 onClick={() => onLogin('recruiter')}
-                                className="bg-white text-purple-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
+                                className="bg-white text-purple-600 px-8 py-4 rounded-xl font-semibold hover:bg-gray-100 transition-all transform hover:scale-105 shadow-lg"
                             >
-                                Login as Recruiter
+                                Enter Command Center
                             </button>
                             <button 
                                 onClick={() => onLogin('candidate')}
-                                className="bg-transparent border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white/10 transition-colors"
+                                className="bg-transparent border-2 border-white text-white px-8 py-4 rounded-xl font-semibold hover:bg-white/10 transition-all transform hover:scale-105"
                             >
-                                Login as Candidate
+                                Build Skills Passport
                             </button>
+                        </div>
+                        
+                        <div className="mt-12 text-center">
+                            <p className="text-white/70 text-sm">
+                                Trusted by 500+ companies • 100K+ verified candidates • 99.9% uptime
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -207,128 +335,317 @@
             return (
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
                     <div className="flex justify-between items-center mb-8">
-                        <h1 className="text-3xl font-bold text-gray-900">Recruiter Dashboard</h1>
-                        <button className="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors">
-                            Post New Job
-                        </button>
+                        <div>
+                            <h1 className="text-3xl font-bold text-gray-900">Recruiter Command Center</h1>
+                            <p className="text-gray-600 mt-1">AI-powered talent acquisition at your fingertips</p>
+                        </div>
+                        <div className="flex space-x-3">
+                            <button className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-3 rounded-lg hover:from-purple-700 hover:to-pink-700 transition-all transform hover:scale-105 shadow-lg">
+                                + Post Job with AI
+                            </button>
+                            <button className="bg-white border border-gray-300 text-gray-700 px-6 py-3 rounded-lg hover:bg-gray-50 transition-colors">
+                                Import ATS Data
+                            </button>
+                        </div>
                     </div>
                     
                     <div className="border-b border-gray-200 mb-8">
                         <nav className="-mb-px flex space-x-8">
-                            {['overview', 'jobs', 'candidates', 'analytics'].map(tab => (
+                            {['overview', 'phoenix-search', 'candidates', 'jobs', 'analytics', 'assessments'].map(tab => (
                                 <button
                                     key={tab}
                                     onClick={() => setActiveTab(tab)}
-                                    className={`py-2 px-1 border-b-2 font-medium text-sm capitalize ${
+                                    className={`py-3 px-1 border-b-2 font-medium text-sm capitalize ${
                                         activeTab === tab 
                                             ? 'border-purple-500 text-purple-600' 
                                             : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
                                     }`}
                                 >
-                                    {tab}
+                                    {tab.replace('-', ' ')}
                                 </button>
                             ))}
                         </nav>
                     </div>
                     
                     {activeTab === 'overview' && <RecruiterOverview />}
-                    {activeTab === 'jobs' && <JobsManagement />}
+                    {activeTab === 'phoenix-search' && <PhoenixSearch />}
                     {activeTab === 'candidates' && <CandidatesView />}
+                    {activeTab === 'jobs' && <JobsManagement />}
                     {activeTab === 'analytics' && <AnalyticsDashboard />}
+                    {activeTab === 'assessments' && <AssessmentsView />}
                 </div>
             );
         };
 
         const RecruiterOverview = () => (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-                <div className="bg-white p-6 rounded-lg shadow-sm border">
-                    <div className="flex items-center justify-between">
-                        <div>
-                            <p className="text-sm font-medium text-gray-600">Active Jobs</p>
-                            <p className="text-2xl font-semibold text-gray-900">24</p>
+            <div className="space-y-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                        <div className="flex items-center justify-between">
+                            <div>
+                                <p className="text-sm font-medium text-gray-600">Active Jobs</p>
+                                <p className="text-3xl font-bold text-gray-900">24</p>
+                                <p className="text-sm text-green-600">+12% vs last month</p>
+                            </div>
+                            <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-blue-600 rounded-xl flex items-center justify-center">
+                                <span className="text-white text-2xl">📋</span>
+                            </div>
                         </div>
-                        <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
-                            <svg className="w-6 h-6 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                            </svg>
+                    </div>
+                    
+                    <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                        <div className="flex items-center justify-between">
+                            <div>
+                                <p className="text-sm font-medium text-gray-600">PPQA Applications</p>
+                                <p className="text-3xl font-bold text-gray-900">127</p>
+                                <p className="text-sm text-green-600">85% qualified rate</p>
+                            </div>
+                            <div className="w-16 h-16 bg-gradient-to-r from-green-500 to-green-600 rounded-xl flex items-center justify-center">
+                                <span className="text-white text-2xl">🎯</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                        <div className="flex items-center justify-between">
+                            <div>
+                                <p className="text-sm font-medium text-gray-600">AI Matches</p>
+                                <p className="text-3xl font-bold text-gray-900">1,247</p>
+                                <p className="text-sm text-blue-600">94% accuracy</p>
+                            </div>
+                            <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-purple-600 rounded-xl flex items-center justify-center">
+                                <span className="text-white text-2xl">🤖</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                        <div className="flex items-center justify-between">
+                            <div>
+                                <p className="text-sm font-medium text-gray-600">Verified Hires</p>
+                                <p className="text-3xl font-bold text-gray-900">8</p>
+                                <p className="text-sm text-green-600">92% retention</p>
+                            </div>
+                            <div className="w-16 h-16 bg-gradient-to-r from-orange-500 to-orange-600 rounded-xl flex items-center justify-center">
+                                <span className="text-white text-2xl">🏆</span>
+                            </div>
                         </div>
                     </div>
                 </div>
-                
-                <div className="bg-white p-6 rounded-lg shadow-sm border">
-                    <div className="flex items-center justify-between">
-                        <div>
-                            <p className="text-sm font-medium text-gray-600">Total Applications</p>
-                            <p className="text-2xl font-semibold text-gray-900">1,247</p>
-                        </div>
-                        <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
-                            <svg className="w-6 h-6 text-green-600" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                            </svg>
-                        </div>
-                    </div>
-                </div>
-                
-                <div className="bg-white p-6 rounded-lg shadow-sm border">
-                    <div className="flex items-center justify-between">
-                        <div>
-                            <p className="text-sm font-medium text-gray-600">Interviews Scheduled</p>
-                            <p className="text-2xl font-semibold text-gray-900">43</p>
-                        </div>
-                        <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
-                            <svg className="w-6 h-6 text-purple-600" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M8 7V3a1 1 0 012 0v4h4a1 1 0 010 2h-4v4a1 1 0 01-2 0v-4H4a1 1 0 010-2h4z"/>
-                            </svg>
+
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                        <h3 className="text-lg font-semibold mb-4">AI Performance Analytics</h3>
+                        <div className="space-y-4">
+                            <div className="flex justify-between items-center">
+                                <span className="text-sm text-gray-600">Multi-Layer Matching Accuracy</span>
+                                <div className="flex items-center space-x-2">
+                                    <div className="w-20 h-2 bg-gray-200 rounded-full">
+                                        <div className="h-full bg-gradient-to-r from-green-400 to-blue-500 rounded-full ai-glow" style={{ width: '96%' }}></div>
+                                    </div>
+                                    <span className="text-sm font-medium text-gray-900">96%</span>
+                                </div>
+                            </div>
+                            <div className="flex justify-between items-center">
+                                <span className="text-sm text-gray-600">Bias Detection Score</span>
+                                <span className="text-sm font-medium text-green-600">Excellent (A+)</span>
+                            </div>
+                            <div className="flex justify-between items-center">
+                                <span className="text-sm text-gray-600">Quality of Hire Prediction</span>
+                                <span className="text-sm font-medium text-blue-600">92% accurate</span>
+                            </div>
                         </div>
                     </div>
-                </div>
-                
-                <div className="bg-white p-6 rounded-lg shadow-sm border">
-                    <div className="flex items-center justify-between">
-                        <div>
-                            <p className="text-sm font-medium text-gray-600">Hires This Month</p>
-                            <p className="text-2xl font-semibold text-gray-900">8</p>
-                        </div>
-                        <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center">
-                            <svg className="w-6 h-6 text-orange-600" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3z"/>
-                            </svg>
+                    
+                    <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                        <h3 className="text-lg font-semibold mb-4">Phoenix Filters Impact</h3>
+                        <div className="space-y-3">
+                            <div className="flex items-center justify-between">
+                                <span className="text-sm text-gray-600">Verified Skill Matches</span>
+                                <span className="text-sm font-medium text-purple-600">+340% quality</span>
+                            </div>
+                            <div className="flex items-center justify-between">
+                                <span className="text-sm text-gray-600">Culture Alignment</span>
+                                <span className="text-sm font-medium text-blue-600">89% fit score</span>
+                            </div>
+                            <div className="flex items-center justify-between">
+                                <span className="text-sm text-gray-600">Project-Based Filtering</span>
+                                <span className="text-sm font-medium text-green-600">78% faster hire</span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         );
 
-        const JobsManagement = () => (
-            <div className="space-y-6">
-                <div className="bg-white rounded-lg shadow-sm border">
-                    <div className="p-6 border-b">
-                        <h3 className="text-lg font-semibold">Active Job Postings</h3>
-                    </div>
-                    <div className="divide-y">
-                        {mockJobs.map(job => (
-                            <div key={job.id} className="p-6">
-                                <div className="flex justify-between items-start">
-                                    <div>
-                                        <h4 className="text-lg font-medium text-gray-900">{job.title}</h4>
-                                        <p className="text-gray-600">{job.company} • {job.location}</p>
-                                        <p className="text-sm text-gray-500 mt-1">{job.posted}</p>
-                                        <div className="flex items-center mt-2 space-x-4">
-                                            <span className="text-sm bg-green-100 text-green-800 px-2 py-1 rounded">
-                                                {job.applications} applications
-                                            </span>
-                                            <span className="text-sm bg-purple-100 text-purple-800 px-2 py-1 rounded">
-                                                AI Score: {(job.aiScore * 100).toFixed(0)}%
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div className="flex space-x-2">
-                                        <button className="text-blue-600 hover:text-blue-800">View</button>
-                                        <button className="text-gray-600 hover:text-gray-800">Edit</button>
-                                    </div>
+        const PhoenixSearch = () => {
+            const [searchTerm, setSearchTerm] = useState('');
+            const [phoenixFilters, setPhoenixFilters] = useState({
+                verifiedSkills: false,
+                cultureAlignment: false,
+                projectExperience: false,
+                blockchainVerified: false
+            });
+            
+            return (
+                <div className="space-y-6">
+                    <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                        <div className="flex items-center space-x-3 mb-6">
+                            <div className="w-10 h-10 phoenix-gradient rounded-lg flex items-center justify-center">
+                                <span className="text-white text-lg">🔍</span>
+                            </div>
+                            <div>
+                                <h3 className="text-lg font-semibold">Phoenix Search Engine</h3>
+                                <p className="text-sm text-gray-600">Semantic & contextual candidate discovery</p>
+                            </div>
+                        </div>
+                        
+                        <div className="space-y-4">
+                            <div className="relative">
+                                <input
+                                    type="text"
+                                    placeholder="Describe your ideal candidate... (e.g., 'Senior developer with ML experience who built production systems')"
+                                    value={searchTerm}
+                                    onChange={(e) => setSearchTerm(e.target.value)}
+                                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent pr-12"
+                                />
+                                <button className="absolute right-3 top-3 text-gray-400 hover:text-purple-600">
+                                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                    </svg>
+                                </button>
+                            </div>
+                            
+                            <div className="bg-gradient-to-r from-purple-50 to-pink-50 p-4 rounded-lg">
+                                <h4 className="font-medium text-gray-900 mb-3">Phoenix Filters</h4>
+                                <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                                    <label className="flex items-center space-x-2 cursor-pointer">
+                                        <input
+                                            type="checkbox"
+                                            checked={phoenixFilters.verifiedSkills}
+                                            onChange={(e) => setPhoenixFilters({...phoenixFilters, verifiedSkills: e.target.checked})}
+                                            className="w-4 h-4 text-purple-600 rounded"
+                                        />
+                                        <span className="text-sm text-gray-700">Verified Skills</span>
+                                    </label>
+                                    <label className="flex items-center space-x-2 cursor-pointer">
+                                        <input
+                                            type="checkbox"
+                                            checked={phoenixFilters.cultureAlignment}
+                                            onChange={(e) => setPhoenixFilters({...phoenixFilters, cultureAlignment: e.target.checked})}
+                                            className="w-4 h-4 text-purple-600 rounded"
+                                        />
+                                        <span className="text-sm text-gray-700">Culture Alignment</span>
+                                    </label>
+                                    <label className="flex items-center space-x-2 cursor-pointer">
+                                        <input
+                                            type="checkbox"
+                                            checked={phoenixFilters.projectExperience}
+                                            onChange={(e) => setPhoenixFilters({...phoenixFilters, projectExperience: e.target.checked})}
+                                            className="w-4 h-4 text-purple-600 rounded"
+                                        />
+                                        <span className="text-sm text-gray-700">Project Experience</span>
+                                    </label>
+                                    <label className="flex items-center space-x-2 cursor-pointer">
+                                        <input
+                                            type="checkbox"
+                                            checked={phoenixFilters.blockchainVerified}
+                                            onChange={(e) => setPhoenixFilters({...phoenixFilters, blockchainVerified: e.target.checked})}
+                                            className="w-4 h-4 text-purple-600 rounded"
+                                        />
+                                        <span className="text-sm text-gray-700">Blockchain Verified</span>
+                                    </label>
                                 </div>
                             </div>
-                        ))}
+                        </div>
+                    </div>
+                    
+                    <div className="bg-white rounded-xl shadow-sm border border-gray-200">
+                        <div className="p-6 border-b border-gray-200">
+                            <div className="flex justify-between items-center">
+                                <h3 className="text-lg font-semibold">AI-Ranked Candidates</h3>
+                                <div className="flex items-center space-x-2">
+                                    <span className="text-sm text-gray-500">Powered by Multi-Layer Algorithm</span>
+                                    <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="divide-y divide-gray-200">
+                            {mockCandidates.map(candidate => (
+                                <CandidateCard key={candidate.id} candidate={candidate} />
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        const CandidateCard = ({ candidate }) => (
+            <div className="p-6 hover:bg-gray-50 transition-colors">
+                <div className="flex justify-between items-start">
+                    <div className="flex items-start space-x-4">
+                        <div className="relative">
+                            <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl flex items-center justify-center">
+                                <span className="text-white font-bold text-lg">{candidate.avatar}</span>
+                            </div>
+                            {candidate.blockchainVerified && (
+                                <div className="absolute -top-1 -right-1 w-6 h-6 blockchain-verified rounded-full flex items-center justify-center">
+                                    <span className="text-white text-xs">✓</span>
+                                </div>
+                            )}
+                        </div>
+                        <div className="flex-1">
+                            <div className="flex items-center space-x-2 mb-1">
+                                <h4 className="text-lg font-semibold text-gray-900">{candidate.name}</h4>
+                                <span className="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full">
+                                    {candidate.lastActive}
+                                </span>
+                            </div>
+                            <p className="text-gray-600 mb-2">{candidate.title}</p>
+                            <p className="text-sm text-gray-500 mb-3">{candidate.location} • {candidate.experience}</p>
+                            
+                            <div className="flex flex-wrap gap-2 mb-3">
+                                {candidate.skills.map(skill => (
+                                    <span key={skill} className="text-xs bg-purple-100 text-purple-800 px-2 py-1 rounded-full">
+                                        {skill}
+                                    </span>
+                                ))}
+                            </div>
+                            
+                            <div className="flex items-center space-x-4 text-sm text-gray-600">
+                                <span>✅ {candidate.verifiedSkills} verified skills</span>
+                                <span>🎯 {candidate.projectsCompleted} projects</span>
+                                <span>🎮 {candidate.assessmentGames} games completed</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div className="text-right">
+                        <div className="mb-4">
+                            <div className="flex items-center space-x-2 mb-1">
+                                <span className="text-sm text-gray-500">Phoenix Score:</span>
+                                <div className="w-24 h-3 bg-gray-200 rounded-full">
+                                    <div 
+                                        className="h-full bg-gradient-to-r from-purple-500 to-pink-500 rounded-full phoenix-glow"
+                                        style={{ width: `${candidate.phoenixScore * 100}%` }}
+                                    ></div>
+                                </div>
+                                <span className="text-sm font-bold text-gray-900">{(candidate.phoenixScore * 100).toFixed(0)}%</span>
+                            </div>
+                            <div className="flex items-center space-x-2">
+                                <span className="text-xs text-gray-500">Culture Fit:</span>
+                                <span className="text-xs font-medium text-blue-600">{(candidate.cultureFit * 100).toFixed(0)}%</span>
+                            </div>
+                        </div>
+                        
+                        <div className="flex space-x-2">
+                            <button className="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors text-sm">
+                                Contact
+                            </button>
+                            <button className="bg-white border border-gray-300 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-50 transition-colors text-sm">
+                                View Profile
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -336,118 +653,220 @@
 
         const CandidatesView = () => (
             <div className="space-y-6">
-                <div className="bg-white rounded-lg shadow-sm border">
-                    <div className="p-6 border-b">
+                <div className="bg-white rounded-xl shadow-sm border border-gray-200">
+                    <div className="p-6 border-b border-gray-200">
                         <div className="flex justify-between items-center">
-                            <h3 className="text-lg font-semibold">Top Candidates</h3>
+                            <h3 className="text-lg font-semibold">AI-Curated Talent Pool</h3>
                             <div className="flex items-center space-x-2">
-                                <span className="text-sm text-gray-500">Powered by AI</span>
+                                <span className="text-sm text-gray-500">Real-time matching</span>
                                 <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
                             </div>
                         </div>
                     </div>
-                    <div className="divide-y">
+                    <div className="divide-y divide-gray-200">
                         {mockCandidates.map(candidate => (
-                            <div key={candidate.id} className="p-6">
-                                <div className="flex justify-between items-start">
-                                    <div className="flex items-center space-x-4">
-                                        <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
-                                            <span className="text-white font-medium">{candidate.avatar}</span>
-                                        </div>
-                                        <div>
-                                            <h4 className="text-lg font-medium text-gray-900">{candidate.name}</h4>
-                                            <p className="text-gray-600">{candidate.title}</p>
-                                            <p className="text-sm text-gray-500">{candidate.location} • {candidate.experience}</p>
-                                            <div className="flex items-center mt-2 space-x-2">
-                                                {candidate.skills.map(skill => (
-                                                    <span key={skill} className="text-xs bg-gray-100 text-gray-800 px-2 py-1 rounded">
-                                                        {skill}
-                                                    </span>
-                                                ))}
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="text-right">
-                                        <div className="flex items-center space-x-2 mb-2">
-                                            <span className="text-sm text-gray-500">AI Match:</span>
-                                            <div className="w-20 h-2 bg-gray-200 rounded-full">
-                                                <div 
-                                                    className="h-full bg-gradient-to-r from-green-400 to-blue-500 rounded-full ai-glow"
-                                                    style={{ width: `${candidate.aiScore * 100}%` }}
-                                                ></div>
-                                            </div>
-                                            <span className="text-sm font-medium text-gray-900">{(candidate.aiScore * 100).toFixed(0)}%</span>
-                                        </div>
-                                        <button className="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700 transition-colors">
-                                            Contact
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
+                            <CandidateCard key={candidate.id} candidate={candidate} />
                         ))}
                     </div>
                 </div>
             </div>
         );
 
+        const JobsManagement = () => (
+            <div className="space-y-6">
+                <div className="bg-white rounded-xl shadow-sm border border-gray-200">
+                    <div className="p-6 border-b border-gray-200">
+                        <h3 className="text-lg font-semibold">Active Job Postings</h3>
+                    </div>
+                    <div className="divide-y divide-gray-200">
+                        {mockJobs.map(job => (
+                            <JobCard key={job.id} job={job} />
+                        ))}
+                    </div>
+                </div>
+            </div>
+        );
+
+        const JobCard = ({ job }) => (
+            <div className="p-6 hover:bg-gray-50 transition-colors">
+                <div className="flex justify-between items-start">
+                    <div className="flex-1">
+                        <div className="flex items-center space-x-2 mb-2">
+                            <h4 className="text-lg font-semibold text-gray-900">{job.title}</h4>
+                            {job.verified && (
+                                <span className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full">
+                                    AI Verified
+                                </span>
+                            )}
+                            {job.remote && (
+                                <span className="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full">
+                                    Remote
+                                </span>
+                            )}
+                            <span className={`text-xs px-2 py-1 rounded-full ${
+                                job.urgency === 'high' ? 'bg-red-100 text-red-800' :
+                                job.urgency === 'medium' ? 'bg-yellow-100 text-yellow-800' :
+                                'bg-gray-100 text-gray-800'
+                            }`}>
+                                {job.urgency} priority
+                            </span>
+                        </div>
+                        <p className="text-gray-600 mb-1">{job.company} • {job.location}</p>
+                        <p className="text-gray-600 mb-2">{job.salary}</p>
+                        <p className="text-sm text-gray-500 mb-3">{job.description}</p>
+                        
+                        <div className="flex flex-wrap gap-2 mb-3">
+                            {job.requirements.map(req => (
+                                <span key={req} className="text-xs bg-gray-100 text-gray-800 px-2 py-1 rounded-full">
+                                    {req}
+                                </span>
+                            ))}
+                        </div>
+                        
+                        <div className="flex items-center space-x-4 text-sm">
+                            <span className="text-gray-500">Posted {job.posted}</span>
+                            <span className="text-blue-600">{job.applications} total applications</span>
+                            <span className="text-green-600">{job.ppqaApplications} PPQA qualified</span>
+                        </div>
+                    </div>
+                    
+                    <div className="text-right ml-6">
+                        <div className="mb-4">
+                            <div className="flex items-center space-x-2 mb-1">
+                                <span className="text-sm text-gray-500">Phoenix Score:</span>
+                                <div className="w-20 h-2 bg-gray-200 rounded-full">
+                                    <div 
+                                        className="h-full bg-gradient-to-r from-purple-500 to-pink-500 rounded-full phoenix-glow"
+                                        style={{ width: `${job.phoenixScore * 100}%` }}
+                                    ></div>
+                                </div>
+                                <span className="text-sm font-bold text-gray-900">{(job.phoenixScore * 100).toFixed(0)}%</span>
+                            </div>
+                            <div className="flex items-center space-x-2">
+                                <span className="text-xs text-gray-500">Match Quality:</span>
+                                <span className="text-xs font-medium text-green-600">{(job.skillsMatch * 100).toFixed(0)}%</span>
+                            </div>
+                        </div>
+                        
+                        <div className="flex space-x-2">
+                            <button className="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors text-sm">
+                                View Applications
+                            </button>
+                            <button className="bg-white border border-gray-300 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-50 transition-colors text-sm">
+                                Edit
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
+
         const AnalyticsDashboard = () => (
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <div className="bg-white p-6 rounded-lg shadow-sm border">
-                    <h3 className="text-lg font-semibold mb-4">Hiring Funnel</h3>
-                    <div className="space-y-4">
-                        <div className="flex justify-between items-center">
-                            <span className="text-sm text-gray-600">Applications</span>
-                            <span className="text-sm font-medium">1,247</span>
+            <div className="space-y-6">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                        <h3 className="text-lg font-semibold mb-4">Multi-Layer Matching Performance</h3>
+                        <div className="space-y-4">
+                            <div className="flex justify-between items-center">
+                                <span className="text-sm text-gray-600">Layer 1: Semantic Matching</span>
+                                <span className="text-sm font-medium text-blue-600">94%</span>
+                            </div>
+                            <div className="w-full bg-gray-200 rounded-full h-2">
+                                <div className="bg-blue-600 h-2 rounded-full" style={{ width: '94%' }}></div>
+                            </div>
+                            
+                            <div className="flex justify-between items-center">
+                                <span className="text-sm text-gray-600">Layer 2: Skills Verification</span>
+                                <span className="text-sm font-medium text-green-600">89%</span>
+                            </div>
+                            <div className="w-full bg-gray-200 rounded-full h-2">
+                                <div className="bg-green-600 h-2 rounded-full" style={{ width: '89%' }}></div>
+                            </div>
+                            
+                            <div className="flex justify-between items-center">
+                                <span className="text-sm text-gray-600">Layer 3: Predictive Analytics</span>
+                                <span className="text-sm font-medium text-purple-600">96%</span>
+                            </div>
+                            <div className="w-full bg-gray-200 rounded-full h-2">
+                                <div className="bg-purple-600 h-2 rounded-full" style={{ width: '96%' }}></div>
+                            </div>
                         </div>
-                        <div className="w-full bg-gray-200 rounded-full h-2">
-                            <div className="bg-blue-600 h-2 rounded-full" style={{ width: '100%' }}></div>
-                        </div>
-                        
-                        <div className="flex justify-between items-center">
-                            <span className="text-sm text-gray-600">Screened</span>
-                            <span className="text-sm font-medium">324</span>
-                        </div>
-                        <div className="w-full bg-gray-200 rounded-full h-2">
-                            <div className="bg-green-600 h-2 rounded-full" style={{ width: '75%' }}></div>
-                        </div>
-                        
-                        <div className="flex justify-between items-center">
-                            <span className="text-sm text-gray-600">Interviews</span>
-                            <span className="text-sm font-medium">89</span>
-                        </div>
-                        <div className="w-full bg-gray-200 rounded-full h-2">
-                            <div className="bg-yellow-600 h-2 rounded-full" style={{ width: '50%' }}></div>
-                        </div>
-                        
-                        <div className="flex justify-between items-center">
-                            <span className="text-sm text-gray-600">Offers</span>
-                            <span className="text-sm font-medium">23</span>
-                        </div>
-                        <div className="w-full bg-gray-200 rounded-full h-2">
-                            <div className="bg-purple-600 h-2 rounded-full" style={{ width: '25%' }}></div>
+                    </div>
+                    
+                    <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                        <h3 className="text-lg font-semibold mb-4">PPQA Performance</h3>
+                        <div className="space-y-4">
+                            <div className="flex justify-between items-center">
+                                <span className="text-sm text-gray-600">Qualified Application Rate</span>
+                                <span className="text-sm font-medium text-green-600">85%</span>
+                            </div>
+                            <div className="flex justify-between items-center">
+                                <span className="text-sm text-gray-600">Cost Per Qualified Lead</span>
+                                <span className="text-sm font-medium text-blue-600">$23</span>
+                            </div>
+                            <div className="flex justify-between items-center">
+                                <span className="text-sm text-gray-600">Time to First Interview</span>
+                                <span className="text-sm font-medium text-purple-600">2.3 days</span>
+                            </div>
+                            <div className="flex justify-between items-center">
+                                <span className="text-sm text-gray-600">Hire Success Rate</span>
+                                <span className="text-sm font-medium text-orange-600">92%</span>
+                            </div>
                         </div>
                     </div>
                 </div>
                 
-                <div className="bg-white p-6 rounded-lg shadow-sm border">
-                    <h3 className="text-lg font-semibold mb-4">AI Performance Metrics</h3>
-                    <div className="space-y-4">
-                        <div className="flex justify-between items-center">
-                            <span className="text-sm text-gray-600">Resume Screening Accuracy</span>
-                            <span className="text-sm font-medium text-green-600">94.2%</span>
+                <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                    <h3 className="text-lg font-semibold mb-4">Diversity & Inclusion Analytics</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div className="text-center">
+                            <div className="text-3xl font-bold text-blue-600 mb-2">47%</div>
+                            <div className="text-sm text-gray-600">Diverse Candidates</div>
                         </div>
-                        <div className="flex justify-between items-center">
-                            <span className="text-sm text-gray-600">Time to First Interview</span>
-                            <span className="text-sm font-medium text-blue-600">3.2 days</span>
+                        <div className="text-center">
+                            <div className="text-3xl font-bold text-green-600 mb-2">A+</div>
+                            <div className="text-sm text-gray-600">Bias Score</div>
                         </div>
-                        <div className="flex justify-between items-center">
-                            <span className="text-sm text-gray-600">Quality of Hire Score</span>
-                            <span className="text-sm font-medium text-purple-600">8.7/10</span>
+                        <div className="text-center">
+                            <div className="text-3xl font-bold text-purple-600 mb-2">23%</div>
+                            <div className="text-sm text-gray-600">Inclusive Hires</div>
                         </div>
-                        <div className="flex justify-between items-center">
-                            <span className="text-sm text-gray-600">Candidate Satisfaction</span>
-                            <span className="text-sm font-medium text-orange-600">4.6/5</span>
-                        </div>
+                    </div>
+                </div>
+            </div>
+        );
+
+        const AssessmentsView = () => (
+            <div className="space-y-6">
+                <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                    <h3 className="text-lg font-semibold mb-4">Gamified Skill Assessments</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        {mockAssessments.map(assessment => (
+                            <div key={assessment.id} className="game-card p-6 rounded-xl border border-gray-200">
+                                <div className="text-center mb-4">
+                                    <div className="text-4xl mb-2">{assessment.icon}</div>
+                                    <h4 className="font-semibold text-gray-900">{assessment.name}</h4>
+                                    <p className="text-sm text-gray-600">{assessment.description}</p>
+                                </div>
+                                <div className="space-y-2 text-sm">
+                                    <div className="flex justify-between">
+                                        <span className="text-gray-600">Duration:</span>
+                                        <span className="font-medium">{assessment.duration}</span>
+                                    </div>
+                                    <div className="flex justify-between">
+                                        <span className="text-gray-600">Participants:</span>
+                                        <span className="font-medium">{assessment.participants.toLocaleString()}</span>
+                                    </div>
+                                    <div className="flex justify-between">
+                                        <span className="text-gray-600">Avg Score:</span>
+                                        <span className="font-medium">{assessment.averageScore}%</span>
+                                    </div>
+                                </div>
+                                <button className="w-full mt-4 bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-700 transition-colors">
+                                    View Results
+                                </button>
+                            </div>
+                        ))}
                     </div>
                 </div>
             </div>
@@ -459,25 +878,33 @@
             return (
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
                     <div className="flex justify-between items-center mb-8">
-                        <h1 className="text-3xl font-bold text-gray-900">Candidate Dashboard</h1>
-                        <button className="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors">
-                            Upload Resume
-                        </button>
+                        <div>
+                            <h1 className="text-3xl font-bold text-gray-900">Skills Passport</h1>
+                            <p className="text-gray-600 mt-1">Your verified professional identity</p>
+                        </div>
+                        <div className="flex space-x-3">
+                            <button className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-3 rounded-lg hover:from-purple-700 hover:to-pink-700 transition-all transform hover:scale-105 shadow-lg">
+                                🎯 AI Resume Optimizer
+                            </button>
+                            <button className="bg-white border border-gray-300 text-gray-700 px-6 py-3 rounded-lg hover:bg-gray-50 transition-colors">
+                                🎮 Take Assessment
+                            </button>
+                        </div>
                     </div>
                     
                     <div className="border-b border-gray-200 mb-8">
                         <nav className="-mb-px flex space-x-8">
-                            {['overview', 'jobs', 'applications', 'profile'].map(tab => (
+                            {['overview', 'jobs', 'passport', 'assessments', 'applications', 'career-path'].map(tab => (
                                 <button
                                     key={tab}
                                     onClick={() => setActiveTab(tab)}
-                                    className={`py-2 px-1 border-b-2 font-medium text-sm capitalize ${
+                                    className={`py-3 px-1 border-b-2 font-medium text-sm capitalize ${
                                         activeTab === tab 
                                             ? 'border-purple-500 text-purple-600' 
                                             : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
                                     }`}
                                 >
-                                    {tab}
+                                    {tab.replace('-', ' ')}
                                 </button>
                             ))}
                         </nav>
@@ -485,90 +912,271 @@
                     
                     {activeTab === 'overview' && <CandidateOverview />}
                     {activeTab === 'jobs' && <JobSearch />}
+                    {activeTab === 'passport' && <SkillsPassport />}
+                    {activeTab === 'assessments' && <CandidateAssessments />}
                     {activeTab === 'applications' && <ApplicationsView />}
-                    {activeTab === 'profile' && <ProfileView />}
+                    {activeTab === 'career-path' && <CareerPath />}
                 </div>
             );
         };
 
         const CandidateOverview = () => (
             <div className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div className="bg-white p-6 rounded-lg shadow-sm border">
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+                    <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
                         <div className="flex items-center justify-between">
                             <div>
-                                <p className="text-sm font-medium text-gray-600">Profile Views</p>
-                                <p className="text-2xl font-semibold text-gray-900">127</p>
+                                <p className="text-sm font-medium text-gray-600">Phoenix Score</p>
+                                <p className="text-3xl font-bold text-purple-600">94</p>
+                                <p className="text-sm text-green-600">Top 5%</p>
                             </div>
-                            <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
-                                <svg className="w-6 h-6 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
-                                    <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"/>
-                                    <path fillRule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10z"/>
-                                </svg>
+                            <div className="w-16 h-16 phoenix-gradient rounded-xl flex items-center justify-center">
+                                <span className="text-white text-2xl">🔥</span>
                             </div>
                         </div>
                     </div>
                     
-                    <div className="bg-white p-6 rounded-lg shadow-sm border">
+                    <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
                         <div className="flex items-center justify-between">
                             <div>
-                                <p className="text-sm font-medium text-gray-600">Applications</p>
-                                <p className="text-2xl font-semibold text-gray-900">23</p>
+                                <p className="text-sm font-medium text-gray-600">Verified Skills</p>
+                                <p className="text-3xl font-bold text-green-600">12</p>
+                                <p className="text-sm text-blue-600">+3 this month</p>
                             </div>
-                            <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
-                                <svg className="w-6 h-6 text-green-600" fill="currentColor" viewBox="0 0 20 20">
-                                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                                </svg>
+                            <div className="w-16 h-16 bg-gradient-to-r from-green-500 to-green-600 rounded-xl flex items-center justify-center">
+                                <span className="text-white text-2xl">✅</span>
                             </div>
                         </div>
                     </div>
                     
-                    <div className="bg-white p-6 rounded-lg shadow-sm border">
+                    <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
                         <div className="flex items-center justify-between">
                             <div>
-                                <p className="text-sm font-medium text-gray-600">Interview Requests</p>
-                                <p className="text-2xl font-semibold text-gray-900">7</p>
+                                <p className="text-sm font-medium text-gray-600">Job Matches</p>
+                                <p className="text-3xl font-bold text-blue-600">47</p>
+                                <p className="text-sm text-purple-600">92% avg fit</p>
                             </div>
-                            <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
-                                <svg className="w-6 h-6 text-purple-600" fill="currentColor" viewBox="0 0 20 20">
-                                    <path d="M8 7V3a1 1 0 012 0v4h4a1 1 0 010 2h-4v4a1 1 0 01-2 0v-4H4a1 1 0 010-2h4z"/>
-                                </svg>
+                            <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-blue-600 rounded-xl flex items-center justify-center">
+                                <span className="text-white text-2xl">🎯</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                        <div className="flex items-center justify-between">
+                            <div>
+                                <p className="text-sm font-medium text-gray-600">Blockchain Verified</p>
+                                <p className="text-3xl font-bold text-green-600">✓</p>
+                                <p className="text-sm text-gray-600">Credentials</p>
+                            </div>
+                            <div className="w-16 h-16 blockchain-verified rounded-xl flex items-center justify-center">
+                                <span className="text-white text-2xl">🔒</span>
                             </div>
                         </div>
                     </div>
                 </div>
                 
-                <div className="bg-white p-6 rounded-lg shadow-sm border">
-                    <h3 className="text-lg font-semibold mb-4">AI-Powered Resume Analysis</h3>
-                    <div className="space-y-4">
-                        <div className="flex justify-between items-center">
-                            <span className="text-sm text-gray-600">Overall Score</span>
-                            <div className="flex items-center space-x-2">
-                                <div className="w-32 h-2 bg-gray-200 rounded-full">
-                                    <div className="h-full bg-gradient-to-r from-green-400 to-blue-500 rounded-full ai-glow" style={{ width: '92%' }}></div>
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                        <h3 className="text-lg font-semibold mb-4">AI Resume Analysis</h3>
+                        <div className="space-y-4">
+                            <div className="flex justify-between items-center">
+                                <span className="text-sm text-gray-600">Overall Score</span>
+                                <div className="flex items-center space-x-2">
+                                    <div className="w-32 h-3 bg-gray-200 rounded-full">
+                                        <div className="h-full bg-gradient-to-r from-green-400 to-blue-500 rounded-full ai-glow" style={{ width: '94%' }}></div>
+                                    </div>
+                                    <span className="text-sm font-bold text-gray-900">94/100</span>
                                 </div>
-                                <span className="text-sm font-medium text-gray-900">92/100</span>
+                            </div>
+                            
+                            <div className="bg-gradient-to-r from-green-50 to-blue-50 p-4 rounded-lg">
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <h4 className="font-medium text-gray-900 mb-2">✅ Strengths</h4>
+                                        <ul className="text-sm text-gray-600 space-y-1">
+                                            <li>• Verified technical skills</li>
+                                            <li>• Quantified achievements</li>
+                                            <li>• Strong project portfolio</li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <h4 className="font-medium text-gray-900 mb-2">📈 Opportunities</h4>
+                                        <ul className="text-sm text-gray-600 space-y-1">
+                                            <li>• Add leadership examples</li>
+                                            <li>• Include soft skills</li>
+                                            <li>• Expand certifications</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                        <h3 className="text-lg font-semibold mb-4">Career Development Progress</h3>
+                        <div className="space-y-4">
+                            <div className="flex items-center justify-between">
+                                <span className="text-sm text-gray-600">Skill Development</span>
+                                <span className="text-sm font-medium text-green-600">87%</span>
+                            </div>
+                            <div className="w-full bg-gray-200 rounded-full h-2">
+                                <div className="bg-green-600 h-2 rounded-full" style={{ width: '87%' }}></div>
+                            </div>
+                            
+                            <div className="flex items-center justify-between">
+                                <span className="text-sm text-gray-600">Career Goals</span>
+                                <span className="text-sm font-medium text-blue-600">73%</span>
+                            </div>
+                            <div className="w-full bg-gray-200 rounded-full h-2">
+                                <div className="bg-blue-600 h-2 rounded-full" style={{ width: '73%' }}></div>
+                            </div>
+                            
+                            <div className="flex items-center justify-between">
+                                <span className="text-sm text-gray-600">Network Growth</span>
+                                <span className="text-sm font-medium text-purple-600">91%</span>
+                            </div>
+                            <div className="w-full bg-gray-200 rounded-full h-2">
+                                <div className="bg-purple-600 h-2 rounded-full" style={{ width: '91%' }}></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
+
+        const SkillsPassport = () => (
+            <div className="space-y-6">
+                <div className="skills-passport p-6 rounded-xl shadow-sm border border-gray-200">
+                    <div className="flex items-center space-x-3 mb-6">
+                        <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center">
+                            <span className="text-2xl">🛡️</span>
+                        </div>
+                        <div>
+                            <h3 className="text-xl font-semibold text-gray-900">Dynamic Skills Passport</h3>
+                            <p className="text-gray-600">Your verified professional identity</p>
+                        </div>
+                    </div>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div className="bg-white p-4 rounded-lg">
+                            <h4 className="font-medium text-gray-900 mb-3">Verified Skills</h4>
+                            <div className="space-y-2">
+                                {['Python', 'Machine Learning', 'React', 'AWS', 'Docker', 'Kubernetes'].map(skill => (
+                                    <div key={skill} className="flex items-center space-x-2">
+                                        <div className="w-4 h-4 bg-green-500 rounded-full flex items-center justify-center">
+                                            <span className="text-white text-xs">✓</span>
+                                        </div>
+                                        <span className="text-sm text-gray-700">{skill}</span>
+                                    </div>
+                                ))}
                             </div>
                         </div>
                         
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div>
-                                <h4 className="font-medium text-gray-900 mb-2">Strengths</h4>
-                                <ul className="text-sm text-gray-600 space-y-1">
-                                    <li>• Strong technical skills alignment</li>
-                                    <li>• Relevant work experience</li>
-                                    <li>• Clear career progression</li>
-                                </ul>
-                            </div>
-                            <div>
-                                <h4 className="font-medium text-gray-900 mb-2">Improvement Areas</h4>
-                                <ul className="text-sm text-gray-600 space-y-1">
-                                    <li>• Add more quantifiable achievements</li>
-                                    <li>• Include relevant certifications</li>
-                                    <li>• Optimize for ATS keywords</li>
-                                </ul>
+                        <div className="bg-white p-4 rounded-lg">
+                            <h4 className="font-medium text-gray-900 mb-3">Blockchain Verified</h4>
+                            <div className="space-y-2">
+                                <div className="flex items-center space-x-2">
+                                    <div className="w-4 h-4 blockchain-verified rounded-full flex items-center justify-center">
+                                        <span className="text-white text-xs">🔒</span>
+                                    </div>
+                                    <span className="text-sm text-gray-700">MS Computer Science</span>
+                                </div>
+                                <div className="flex items-center space-x-2">
+                                    <div className="w-4 h-4 blockchain-verified rounded-full flex items-center justify-center">
+                                        <span className="text-white text-xs">🔒</span>
+                                    </div>
+                                    <span className="text-sm text-gray-700">AWS Certified</span>
+                                </div>
+                                <div className="flex items-center space-x-2">
+                                    <div className="w-4 h-4 blockchain-verified rounded-full flex items-center justify-center">
+                                        <span className="text-white text-xs">🔒</span>
+                                    </div>
+                                    <span className="text-sm text-gray-700">5 Years Experience</span>
+                                </div>
                             </div>
                         </div>
+                        
+                        <div className="bg-white p-4 rounded-lg">
+                            <h4 className="font-medium text-gray-900 mb-3">Project Portfolio</h4>
+                            <div className="space-y-2">
+                                <div className="flex items-center space-x-2">
+                                    <div className="w-4 h-4 bg-blue-500 rounded-full flex items-center justify-center">
+                                        <span className="text-white text-xs">📁</span>
+                                    </div>
+                                    <span className="text-sm text-gray-700">ML Trading Bot</span>
+                                </div>
+                                <div className="flex items-center space-x-2">
+                                    <div className="w-4 h-4 bg-blue-500 rounded-full flex items-center justify-center">
+                                        <span className="text-white text-xs">📁</span>
+                                    </div>
+                                    <span className="text-sm text-gray-700">React Dashboard</span>
+                                </div>
+                                <div className="flex items-center space-x-2">
+                                    <div className="w-4 h-4 bg-blue-500 rounded-full flex items-center justify-center">
+                                        <span className="text-white text-xs">📁</span>
+                                    </div>
+                                    <span className="text-sm text-gray-700">Cloud Architecture</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
+
+        const CandidateAssessments = () => (
+            <div className="space-y-6">
+                <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                    <h3 className="text-lg font-semibold mb-4">Available Skill Games</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        {mockAssessments.map(assessment => (
+                            <div key={assessment.id} className="game-card p-6 rounded-xl border border-gray-200">
+                                <div className="text-center mb-4">
+                                    <div className="text-4xl mb-2">{assessment.icon}</div>
+                                    <h4 className="font-semibold text-gray-900">{assessment.name}</h4>
+                                    <p className="text-sm text-gray-600">{assessment.description}</p>
+                                </div>
+                                <div className="space-y-2 text-sm mb-4">
+                                    <div className="flex justify-between">
+                                        <span className="text-gray-600">Duration:</span>
+                                        <span className="font-medium">{assessment.duration}</span>
+                                    </div>
+                                    <div className="flex justify-between">
+                                        <span className="text-gray-600">Your Best:</span>
+                                        <span className="font-medium text-green-600">
+                                            {assessment.averageScore + Math.floor(Math.random() * 10)}%
+                                        </span>
+                                    </div>
+                                </div>
+                                <button className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-2 rounded-lg hover:from-purple-700 hover:to-pink-700 transition-all">
+                                    Play Again
+                                </button>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+                
+                <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                    <h3 className="text-lg font-semibold mb-4">Assessment History</h3>
+                    <div className="space-y-4">
+                        {mockAssessments.map((assessment, index) => (
+                            <div key={index} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                                <div className="flex items-center space-x-3">
+                                    <span className="text-2xl">{assessment.icon}</span>
+                                    <div>
+                                        <p className="font-medium text-gray-900">{assessment.name}</p>
+                                        <p className="text-sm text-gray-600">Completed {Math.floor(Math.random() * 30) + 1} days ago</p>
+                                    </div>
+                                </div>
+                                <div className="text-right">
+                                    <p className="text-lg font-bold text-green-600">
+                                        {assessment.averageScore + Math.floor(Math.random() * 10)}%
+                                    </p>
+                                    <p className="text-sm text-gray-600">Top 15%</p>
+                                </div>
+                            </div>
+                        ))}
                     </div>
                 </div>
             </div>
@@ -580,70 +1188,46 @@
             
             return (
                 <div className="space-y-6">
-                    <div className="bg-white p-6 rounded-lg shadow-sm border">
-                        <h3 className="text-lg font-semibold mb-4">Find Your Next Opportunity</h3>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                        <h3 className="text-lg font-semibold mb-4">AI-Powered Job Discovery</h3>
+                        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                             <input
                                 type="text"
-                                placeholder="Job title or keywords"
+                                placeholder="Job title or skills"
                                 value={searchTerm}
                                 onChange={(e) => setSearchTerm(e.target.value)}
-                                className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                                className="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                             />
                             <input
                                 type="text"
-                                placeholder="Location"
+                                placeholder="Location or remote"
                                 value={location}
                                 onChange={(e) => setLocation(e.target.value)}
-                                className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                                className="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                             />
-                            <button className="bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700 transition-colors">
-                                Search Jobs
+                            <select className="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                                <option>Salary Range</option>
+                                <option>$50K - $80K</option>
+                                <option>$80K - $120K</option>
+                                <option>$120K - $160K</option>
+                                <option>$160K+</option>
+                            </select>
+                            <button className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-3 rounded-lg hover:from-purple-700 hover:to-pink-700 transition-all">
+                                🔍 Search
                             </button>
                         </div>
                     </div>
                     
-                    <div className="bg-white rounded-lg shadow-sm border">
-                        <div className="p-6 border-b">
+                    <div className="bg-white rounded-xl shadow-sm border border-gray-200">
+                        <div className="p-6 border-b border-gray-200">
                             <div className="flex justify-between items-center">
-                                <h3 className="text-lg font-semibold">Recommended Jobs</h3>
-                                <span className="text-sm text-gray-500">Powered by AI matching</span>
+                                <h3 className="text-lg font-semibold">AI-Matched Opportunities</h3>
+                                <span className="text-sm text-gray-500">Personalized for your Skills Passport</span>
                             </div>
                         </div>
-                        <div className="divide-y">
+                        <div className="divide-y divide-gray-200">
                             {mockJobs.map(job => (
-                                <div key={job.id} className="p-6">
-                                    <div className="flex justify-between items-start">
-                                        <div className="flex-1">
-                                            <h4 className="text-lg font-medium text-gray-900">{job.title}</h4>
-                                            <p className="text-gray-600">{job.company} • {job.location}</p>
-                                            <p className="text-gray-600">{job.salary}</p>
-                                            <p className="text-sm text-gray-500 mt-2">{job.description}</p>
-                                            <div className="flex items-center mt-3 space-x-2">
-                                                {job.requirements.slice(0, 3).map(req => (
-                                                    <span key={req} className="text-xs bg-gray-100 text-gray-800 px-2 py-1 rounded">
-                                                        {req}
-                                                    </span>
-                                                ))}
-                                            </div>
-                                        </div>
-                                        <div className="text-right ml-4">
-                                            <div className="flex items-center space-x-2 mb-3">
-                                                <span className="text-sm text-gray-500">AI Match:</span>
-                                                <div className="w-16 h-2 bg-gray-200 rounded-full">
-                                                    <div 
-                                                        className="h-full bg-gradient-to-r from-green-400 to-blue-500 rounded-full ai-glow"
-                                                        style={{ width: `${job.aiScore * 100}%` }}
-                                                    ></div>
-                                                </div>
-                                                <span className="text-sm font-medium text-gray-900">{(job.aiScore * 100).toFixed(0)}%</span>
-                                            </div>
-                                            <button className="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700 transition-colors">
-                                                Apply Now
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
+                                <CandidateJobCard key={job.id} job={job} />
                             ))}
                         </div>
                     </div>
@@ -651,28 +1235,119 @@
             );
         };
 
+        const CandidateJobCard = ({ job }) => (
+            <div className="p-6 hover:bg-gray-50 transition-colors">
+                <div className="flex justify-between items-start">
+                    <div className="flex-1">
+                        <div className="flex items-center space-x-2 mb-2">
+                            <h4 className="text-lg font-semibold text-gray-900">{job.title}</h4>
+                            {job.verified && (
+                                <span className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full">
+                                    AI Verified
+                                </span>
+                            )}
+                            {job.remote && (
+                                <span className="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full">
+                                    Remote
+                                </span>
+                            )}
+                        </div>
+                        <p className="text-gray-600 mb-1">{job.company} • {job.location}</p>
+                        <p className="text-gray-600 mb-2">{job.salary}</p>
+                        <p className="text-sm text-gray-500 mb-3">{job.description}</p>
+                        
+                        <div className="flex flex-wrap gap-2 mb-3">
+                            {job.requirements.map(req => (
+                                <span key={req} className="text-xs bg-gray-100 text-gray-800 px-2 py-1 rounded-full">
+                                    {req}
+                                </span>
+                            ))}
+                        </div>
+                        
+                        <div className="flex items-center space-x-4 text-sm text-gray-500">
+                            <span>Posted {job.posted}</span>
+                            <span className="text-blue-600">{job.applications} applicants</span>
+                        </div>
+                    </div>
+                    
+                    <div className="text-right ml-6">
+                        <div className="mb-4">
+                            <div className="flex items-center space-x-2 mb-2">
+                                <span className="text-sm text-gray-500">Match Score:</span>
+                                <div className="w-24 h-3 bg-gray-200 rounded-full">
+                                    <div 
+                                        className="h-full bg-gradient-to-r from-green-400 to-blue-500 rounded-full ai-glow"
+                                        style={{ width: `${job.phoenixScore * 100}%` }}
+                                    ></div>
+                                </div>
+                                <span className="text-sm font-bold text-gray-900">{(job.phoenixScore * 100).toFixed(0)}%</span>
+                            </div>
+                            <div className="flex items-center space-x-2 mb-2">
+                                <span className="text-xs text-gray-500">Skills Match:</span>
+                                <span className="text-xs font-medium text-green-600">{(job.skillsMatch * 100).toFixed(0)}%</span>
+                            </div>
+                            <div className="flex items-center space-x-2">
+                                <span className="text-xs text-gray-500">Culture Fit:</span>
+                                <span className="text-xs font-medium text-blue-600">{(job.cultureFit * 100).toFixed(0)}%</span>
+                            </div>
+                        </div>
+                        
+                        <div className="flex space-x-2">
+                            <button className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-2 rounded-lg hover:from-purple-700 hover:to-pink-700 transition-all">
+                                Apply Now
+                            </button>
+                            <button className="bg-white border border-gray-300 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-50 transition-colors">
+                                Save
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
+
         const ApplicationsView = () => (
-            <div className="bg-white rounded-lg shadow-sm border">
-                <div className="p-6 border-b">
+            <div className="bg-white rounded-xl shadow-sm border border-gray-200">
+                <div className="p-6 border-b border-gray-200">
                     <h3 className="text-lg font-semibold">My Applications</h3>
                 </div>
-                <div className="divide-y">
+                <div className="divide-y divide-gray-200">
                     {mockJobs.slice(0, 2).map((job, index) => (
                         <div key={job.id} className="p-6">
                             <div className="flex justify-between items-start">
-                                <div>
-                                    <h4 className="text-lg font-medium text-gray-900">{job.title}</h4>
-                                    <p className="text-gray-600">{job.company} • {job.location}</p>
-                                    <p className="text-sm text-gray-500 mt-1">Applied {index === 0 ? '3 days ago' : '1 week ago'}</p>
+                                <div className="flex-1">
+                                    <div className="flex items-center space-x-2 mb-2">
+                                        <h4 className="text-lg font-semibold text-gray-900">{job.title}</h4>
+                                        <span className={`inline-flex px-2 py-1 text-xs font-medium rounded-full ${
+                                            index === 0 
+                                                ? 'bg-green-100 text-green-800' 
+                                                : 'bg-yellow-100 text-yellow-800'
+                                        }`}>
+                                            {index === 0 ? 'Interview Scheduled' : 'Under Review'}
+                                        </span>
+                                    </div>
+                                    <p className="text-gray-600 mb-1">{job.company} • {job.location}</p>
+                                    <p className="text-sm text-gray-500 mb-2">Applied {index === 0 ? '5 days ago' : '2 weeks ago'}</p>
+                                    
+                                    <div className="flex items-center space-x-4 text-sm">
+                                        <span className="text-green-600">✅ Resume viewed</span>
+                                        <span className="text-blue-600">📊 Skills matched: {(job.skillsMatch * 100).toFixed(0)}%</span>
+                                        {index === 0 && <span className="text-purple-600">📅 Interview: Tomorrow 2pm</span>}
+                                    </div>
                                 </div>
+                                
                                 <div className="text-right">
-                                    <span className={`inline-flex px-2 py-1 text-xs font-medium rounded-full ${
-                                        index === 0 
-                                            ? 'bg-yellow-100 text-yellow-800' 
-                                            : 'bg-green-100 text-green-800'
-                                    }`}>
-                                        {index === 0 ? 'Under Review' : 'Interview Scheduled'}
-                                    </span>
+                                    <div className="mb-2">
+                                        <span className="text-sm text-gray-500">Match Score:</span>
+                                        <div className="w-20 h-2 bg-gray-200 rounded-full mt-1">
+                                            <div 
+                                                className="h-full bg-gradient-to-r from-green-400 to-blue-500 rounded-full"
+                                                style={{ width: `${job.phoenixScore * 100}%` }}
+                                            ></div>
+                                        </div>
+                                    </div>
+                                    <button className="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors text-sm">
+                                        View Details
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -681,38 +1356,78 @@
             </div>
         );
 
-        const ProfileView = () => (
+        const CareerPath = () => (
             <div className="space-y-6">
-                <div className="bg-white p-6 rounded-lg shadow-sm border">
-                    <h3 className="text-lg font-semibold mb-4">Profile Information</h3>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
-                            <input type="text" defaultValue="John Doe" className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-purple-500 focus:border-transparent" />
-                        </div>
-                        <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-2">Email</label>
-                            <input type="email" defaultValue="john.doe@email.com" className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-purple-500 focus:border-transparent" />
-                        </div>
-                        <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-2">Phone</label>
-                            <input type="tel" defaultValue="+1 (555) 123-4567" className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-purple-500 focus:border-transparent" />
-                        </div>
-                        <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-2">Location</label>
-                            <input type="text" defaultValue="San Francisco, CA" className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-purple-500 focus:border-transparent" />
+                <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                    <h3 className="text-lg font-semibold mb-4">AI Career Pathway</h3>
+                    <div className="relative">
+                        <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-gradient-to-b from-purple-500 to-pink-500"></div>
+                        <div className="space-y-6">
+                            <div className="relative flex items-start space-x-4">
+                                <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center relative z-10">
+                                    <span className="text-white text-sm">✓</span>
+                                </div>
+                                <div className="flex-1">
+                                    <h4 className="font-semibold text-gray-900">Current: Senior Developer</h4>
+                                    <p className="text-sm text-gray-600">Skills verified • Portfolio complete</p>
+                                </div>
+                            </div>
+                            
+                            <div className="relative flex items-start space-x-4">
+                                <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center relative z-10">
+                                    <span className="text-white text-sm">→</span>
+                                </div>
+                                <div className="flex-1">
+                                    <h4 className="font-semibold text-gray-900">Next: Tech Lead</h4>
+                                    <p className="text-sm text-gray-600">Complete leadership assessment • Gain team management experience</p>
+                                    <div className="mt-2">
+                                        <div className="w-full bg-gray-200 rounded-full h-2">
+                                            <div className="bg-blue-600 h-2 rounded-full" style={{ width: '73%' }}></div>
+                                        </div>
+                                        <p className="text-xs text-gray-500 mt-1">73% complete</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div className="relative flex items-start space-x-4">
+                                <div className="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center relative z-10">
+                                    <span className="text-white text-sm">🎯</span>
+                                </div>
+                                <div className="flex-1">
+                                    <h4 className="font-semibold text-gray-900">Goal: Engineering Manager</h4>
+                                    <p className="text-sm text-gray-600">Develop business acumen • Complete MBA or equivalent</p>
+                                    <div className="mt-2">
+                                        <div className="w-full bg-gray-200 rounded-full h-2">
+                                            <div className="bg-purple-600 h-2 rounded-full" style={{ width: '23%' }}></div>
+                                        </div>
+                                        <p className="text-xs text-gray-500 mt-1">23% complete</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
                 
-                <div className="bg-white p-6 rounded-lg shadow-sm border">
-                    <h3 className="text-lg font-semibold mb-4">Skills & Expertise</h3>
-                    <div className="flex flex-wrap gap-2">
-                        {['React', 'JavaScript', 'Node.js', 'Python', 'AWS', 'MongoDB', 'TypeScript', 'Docker'].map(skill => (
-                            <span key={skill} className="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm">
-                                {skill}
-                            </span>
-                        ))}
+                <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                    <h3 className="text-lg font-semibold mb-4">Recommended Learning</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="p-4 bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg">
+                            <h4 className="font-medium text-gray-900">Leadership Fundamentals</h4>
+                            <p className="text-sm text-gray-600">Master team management and communication</p>
+                            <div className="mt-2 flex items-center space-x-2">
+                                <span className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">4 weeks</span>
+                                <span className="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">Verified Certificate</span>
+                            </div>
+                        </div>
+                        
+                        <div className="p-4 bg-gradient-to-r from-green-50 to-blue-50 rounded-lg">
+                            <h4 className="font-medium text-gray-900">System Architecture</h4>
+                            <p className="text-sm text-gray-600">Design scalable, high-performance systems</p>
+                            <div className="mt-2 flex items-center space-x-2">
+                                <span className="text-xs bg-purple-100 text-purple-800 px-2 py-1 rounded">6 weeks</span>
+                                <span className="text-xs bg-orange-100 text-orange-800 px-2 py-1 rounded">Hands-on Project</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
